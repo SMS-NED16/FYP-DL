@@ -11,3 +11,10 @@ All group members are final year undergraduates from Section D, Batch 2016-17 at
 |2|EE-16163|Saad Mashkoor Siddiqui|
 |3|EE-16164|Faiq Siddiqui|
 |4|EE-16194|Syed Abdul Haseeb Qadri|
+
+## Advisors
+
+|    |Name|Designation|Organization|
+|:-----:|:------|:-----:|:-------:|
+|**Internal**|Dr. Mirza Muhammad Ali Baig|Assistant Professor|Department of Electrical Engineering, NEDUET|
+|**External**|Mr. Shahzeb Anwar|Infrastructure Analyst|ENI Pakistan|
