@@ -1,5 +1,7 @@
 # Datasets
-
+/Dl-Python-Book/chapter-6/glove.6B
+/Dl-Python-Book/chapter-6/acllmbd
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
