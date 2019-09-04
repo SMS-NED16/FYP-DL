@@ -1,6 +1,8 @@
 # Datasets
-/Dl-Python-Book/chapter-6/glove.6B
-/Dl-Python-Book/chapter-6/acllmbd
+/Dl-Python-Book/chapter-6/glove-6B/
+Dl-Python-Book/chapter-6/aclImdb/
+
+
 *.zip
 
 # Byte-compiled / optimized / DLL files
