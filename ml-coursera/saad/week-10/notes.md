@@ -99,3 +99,58 @@ Photo OCR problem involves taking an image and passing it through a sequence of 
 	- There is at least one patch for each slide (actually `n_x` - 1 since the last one won't have a stride).
 	- This is done for both dimensions.
 	- Their product then gives the total number of patches processed.
+
+## Getting Lots of Data - Artificial Data Synthesis
+- Aka data augmentation.
+- One of the most reliable ways of getting a high performance ML system is to use a low-bias algorithm on a very large data set.
+- Where to get so much data from?
+- Artificial data synthesis does not apply to all problems, and takes thought/innovation to apply to a specific problem.
+- But can be an easy way to get a huge training set.
+- Two main variations
+	- Creating new data from scratch.
+	- Amplify training set - turn a small dataset into larger one.
+
+### OCR Approach 1 - Synthetic Data with Fonts
+- For OCR applications, we can use different fonts.
+- Lots of fonts built-in, and even more free font libraries online.
+- Can take characters from different fonts and paste them against random backgrounds. 
+- This creates a new training example that we can add to the dataset. 
+- This is synthetic data.
+
+### OCR Approach 2 - Distortions (Augmentation)
+- Take a random image and introduce artificial distortions into the image. 
+- Take a single image and make 16 new examples.
+- Different distortions based on the nature of the training data.
+- Audio data
+	- If the training example is someone counting from 0 - 5, then we can amplify the data set by introducing different kinds of distortion.
+	- Beeping sounds: audio on a bad cell phone connection.
+	- Noisy background: crowd.
+	- Noisy background: machinery.
+- Distortions that we introduce should be of the type of noise/distortions present in the test set.
+- Uusally oes not help to add purely random/meaningless noise to your data.
+- E.g. for OCR, a representative kind of noise would be random variation in the brightness of the individual pixels.
+
+### Duplication != Augmentation
+- Like Dr. Ng said, the augmentation/distortion we produce must be representative of the actual dataset.
+- It's not enough to simply duplicate training examples because they won't necessarily contain any additional information about the task than the original examples. 
+- This means all we're doing is increasing the computation cost of the training process.
+- If we use linear regression on a training set on `m` samples but make two compies of each sample so that we have a training set of `2m` samples, is this likely to help?
+- No: We will end up with the same parameters for `theta` as before, but at a higher computational cost.
+
+### Discussion on Getting More Data
+- Make sure you have a low bias-high variance model. 
+	- This ensures that adding more data will actually help the model's accuracy.
+	- Keep increasing the number of features the classifier has until you have a low bias classifier (e.g. increase the number of hidden units).
+	- Don't spend a few weeks or months of effort synthesising data without improving model variance.
+- Ask yourself: How much work would it be to get 10x as much data as we currently have?
+	- More often than not, it's really not that hard: only a few days of data.
+	- More data = less overfitting.
+	- Artificial Data Synthesis
+		- Generating from scratch (random fonts and so on)
+		- Distortions and amplifications of existing data
+	- Collect data and label it yourself
+		- How much time does it take to label an example? Number of hours or days to collect and label 10x more data.
+	- Crowd Sourcing
+		- Services such as Amazon's Mechanical Turk will let you hire people to label datasets for you.
+		- Fairly inexpensive.
+		
