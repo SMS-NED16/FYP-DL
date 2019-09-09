@@ -153,4 +153,46 @@ Photo OCR problem involves taking an image and passing it through a sequence of 
 	- Crowd Sourcing
 		- Services such as Amazon's Mechanical Turk will let you hire people to label datasets for you.
 		- Fairly inexpensive.
-		
+
+
+## Ceiling Anaylysis
+- What part of the pipeline to work on next? 
+- One of the most valuable resources in any project is the time of the engineers/developers working on a system.
+- Want to avoid working on some component with diminshing returns.
+- Ceiling analysis: guidance about which parts of the pipeline we should spend the most time on. 
+- Where to allocate resources in the pipeline to get maximum return on effort in terms of performance improvement?
+
+### Example 1 - OCR
+- Assume base accuracy is 72%.
+- Simulate what happens to the overall system performance when the text detection subsystem has 100% accuracy. 
+- Run this data through the rest of the pipeline. Observe system accuracy. Assume it goes to 89%.
+- Then go to character segmentation and give it the correct text detection and character segmentation outputs (through manual labelling). Then observe overall system accuracy - assume it goes to 90%.
+- Do the same thing for the last block: character recognition. 100% accuracy (obviously).
+- We see that performance improvement when text detection is tuned has the highest improvement in accuracy (72% to 89% is 17% increase).
+- In comparison, the performance improvement when the character segmentation and character recognition blocks are improved to perfection are 1% and 10% respectively. 
+- Thus we can conclude we have the most to gain in terms of which system to spend most time on. 
+
+
+### Example 2 - Facial Recognition
+- Look at a picture and recognize whether the person in the image belongs to an existing database of friends.
+- Pipeline is 
+	0. Camera Image
+	1. Preprocess image (remove background)
+	2. Detect face (sliding windows and learning algorithm).
+		- Eyes segmentation
+		- Nose segmentation
+		- Mouth segmentation
+	3. Logistic regression classifier (label for the identity of the person in the image)
+- Ceiling analysis for this pipeline will be more involved.
+- Assume the overall system has 85% accuracy (base)
+- Manually remove the backgrounds of all images (through Photoshop) and then feed these images to the face detection block. This simulates a **perfect preprocessing** output. Observe improvement in accuracy. In this case 0.1%.
+	- This shows that even if we had perfect background removal, it wouldn't make a huge difference in terms of overall system performance.
+- Do the same for all other blocks. 
+- Biggest improvement comes from preprocessing (removing background) to face detection (5.9%), so this should be the first priority.
+
+### Thought Experiment
+- Performing ceiling analysis on a pipelined ML system - plug in the ground truth labels for one component. 
+- The performance of the system improves very little.
+	- So probably not worth dedicating engineering resources to improving that system.
+	- If component is a classifier, simply increasing the number of iterations for gradient descent (decreasing step size) will not cause it converge to better parameters.
+	- Choosing more features for that component will not reduce bias.
