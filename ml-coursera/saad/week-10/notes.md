@@ -89,3 +89,13 @@ Photo OCR problem involves taking an image and passing it through a sequence of 
 ### Character Classification
 - This is a straightforward supervised image classification task.
 - Multiclass, single-label classification problem.
+
+### Formula for approximating the number of patches the sliding window will pass over
+- Assume the length and width of the picture are `x` and `y`.
+- If the stride is `s`, then the number of patches created for the dimension `x` are `n_x` = `x / s`, and similarly the number of patches created for the dimension `y` are approximately `n_y` = `y / s`.
+- So the total number of times a classifier will process a patch = `N` = `n_x` x `n_y`.
+- Will need to explore why this works. It's an empirical observation at this point.
+	- I think because if the stride is 4 pixels, then the total number of strides is represente by the `x / s`.
+	- There is at least one patch for each slide (actually `n_x` - 1 since the last one won't have a stride).
+	- This is done for both dimensions.
+	- Their product then gives the total number of patches processed.
