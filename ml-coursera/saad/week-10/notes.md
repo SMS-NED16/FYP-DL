@@ -73,4 +73,19 @@ Photo OCR problem involves taking an image and passing it through a sequence of 
 	- Training set with positive examples (regions where there are texts) and negative examples (regions of images with not text).
 	- Could run the algorithm on a test set with a constant sliding window size. 
 - Andrew Ng's activation map shows a relatively decent classification result: white areas do, to some extent, correlate to areas with text in the original image.
-- This is just the first step: we also need to form the bounding rectangle.  
+- This is just the first step: we also need to form the bounding rectangle. This is done with **expansion**
+	- For every pixel that is within 5 or 10 pixels of a white pixel, turn that pixel into a white pixel.
+- Look at the contiguous white regions as areas with text and draw bounding rectangles around them.
+- We can use some heuristic to rule out rectangles with widths much smaller than their heights (an aspect ratio that doesn't look right for text, text is usually L-R and wider than it is tall).
+- Can now cutout these bounding rectangles and use later stages in the pipeline to segment and classify the characters in them.
+
+### Character Segmentation
+- Use a supervised learning algorithm to identify splits between two characters in an image patch.
+- Positive examples will have a gap between two characters, negative examples will not.
+- Will use a different learning algorithm to decide between these examples.
+- The test data will then be the patches of the original image extracted from the bounding rectangles.
+- Still done as with sliding windows but only one-dimensional sliding. 
+
+### Character Classification
+- This is a straightforward supervised image classification task.
+- Multiclass, single-label classification problem.
