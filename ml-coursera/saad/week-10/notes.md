@@ -70,4 +70,47 @@
 - Disadvantage: may need to fiddle with the mini-batch size `b`.
 - MBGD becomes the same as batch GD if `b = m`.
 
+## SGD Convergence
+### Checking for Convergence
+- For small BGD problems, we would plot the optimisation cost function against the number of iterations.
+	- When the cost function's value plateaued or reached a constant value, it had converged. 
+- But this isn't practical for large datasets - requires sum over the entire data set.
+- For SGD, compute the cost as the MSE between the predicted and actual value for a single training example.
+- Then during learning update \theta using that training example **after** computing cost. 
+- Repeat this for all trainign examples until convergence.
+- As SGD is scanning through the dataset, just before updating theta, find the MSE on that specific training example. 
+	- If did this after updating theta, it might not be representative of the actual MSE because we just tuned theta to fit that training example.
+- After every 1000 iterations plot cost(theta(x^i, y^i)) averaged over **the last 1000 examples**.
+	- This gives a running estimate on how well the algorithm is doing on the last 1000 examples.
+	- Doesn't cost much to compute the cost and/or averaging the last 1000 costs compared to computing the cost across all `m` examples.
+- Because computed over 1000 samples, the averages will be noisy: may not consistently decrease. 
+- With a smaller learning rate, the algorithm will take longer to converge but will converge at a smaller error.
+	- This is because the parameters will oscillate around the global minimum in SGD.
+	- Smaller learning rate means smaller oscillations about the minimum.
+	- Usually, smaller learning rate means smaller errors.
+- If we **increase the number of training examples** over which the average error is computed, we will get a **smoother curve**.
+	- But feedback on the algorithm's performance will be "delayed" - aggregated after 5 times as many samples.
+- If the cost is not decreasing at all, it may be possible that the algorithm just isn't learning.
+	- Could increase the number of samples over which the error is averaged, as this helps minimise noise and highlight the overall trend - which could be a decrease.
+- If a curve has an increasing error with increasing iterations, the algorithm is **diverging**.
+	- Use a smaller learning rate alpha.
+
+### Learning Rate
+- With SGD, the algorithm won't exactly converge, but will oscillate about the global minimum.
+- **The learning rate for SGD is usually held constant**.
+- To allow for convergence, we can **slowly decrease the learning rate \alpha over time.**
+- Learning rate `alpha = const1 / (iterationNumber + const2)`
+	- `iterationNumber` is the number of SGD iterations run (number of training examples seen)
+	- `const1`, `const2`, are additional algorithm parameters that have to be tweaked.
+- Parameter tuning makes it difficult for alpha reduction to work well, so most people don't use it.
+- But if it done properly, the learning rate will decrease as the parameters approach the global minimum, and so the algorithm takes smaller and smaller steps.
+
+### Key Points
+- If we reduce the learning rate alpha and run SGD long enough, it is possible that we may find a set of better parameters than with larger alpha.
+	- The smaller learning rate can mean the variations about the global minima are smaller, so that the error between the actual analytical solution and numerical solution is smaller, so the cost will be lower and the parameters can be considered `better`.
+- If we plot `cost(theta(x^i. y^i))` (Averaged over the last 1000 examples) and SGD does not seem to be reducing the cost, one possible problem may be that the learning rate alpha is poorly tuned.
+	- Poorly tuned could mean that it is large enough to cause noise or variations about the actual cost which hides the overall trend.
+	- Poorly tuned could also mean that the learning rate is **too** large, and is causing the cost to diverge rather than converge.
+	  
+
 # Advanced Topics
