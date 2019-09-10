@@ -25,4 +25,33 @@
 - But if the training objective and cross validation objective function will converge roughly to the same error, it is a **high bias** learning algorithm, and will not benefit from additional training examples.
 - However, we can add extra features (or hidden units in case of neural network) to a high bias algorithm to improve its variance, and in turn improve the potential for improvement with increased sample size.
 
+## Stochastic Gradient Descent
+- Many learning algorithms were based on deriving a cost function or optimization function which is minimised using another algorithm like gradient descent.
+- But ordinary gradient descent becomes very inefficient for large datasets.
+- Recall that the when minimising the cost function of gradient descent, the parameters of the learning algorithm (as a demo, consider linear regression) move along an `n`-dimensional space to their (hopefully) global minimum. 
+- Computing the derivative term requires summing over all `m` examples - can be very expensive. 
+- E.g. 300M people in the US census data, and the data itself will have several features.
+- This conventional method is called **batch gradient descent** because we're looking at the entire batch of training examples at a time.
+	- Will need to stream through the entire 300M records into memory in chunks - can't load into memory directly. 
+	- For a single step of gradient descent!
+	- And then repeat until convergence.
+- Stochastic gradient descent doesn't look at all training examples in the training set - only a **Single training example**.
+- The cost function for SGD represents how well the parameters of the hypothesis function are doing on a **single** training example `(x^i, y^i)`.
+- The overall cost function `J_train` is just the average cost over `m` training examples.
+- SGD scans through the training examples and looking at only the first example, will modify the parameters a little bit to fit just the first training example a little bit better. 
+- Then move on to the second training example and move the parameters to fit the second training example a little bit better.
+- Repeat until parsed the entire training set. 
+- This is why we randomly shuffle the dataset. 
+- Don't wait for the cost function to parse all training examples in the dataset. Use just one training example at a time to improve the parameters.
+- BGD will take a relatively straight line to to the global minimum, but since SGD looks at individual data points, the direction of descent will be a lot more random - won't be a straight/continuous path to the global minimum. 
+- **Generally, but not always** will make its way to the global minimum.
+- Does not converge in the same sense as a BGD, and keeps wandering around the global minimum - not a problem in practice because so long as the parameters are in some region close to the global minimum.
+
+**TLDR: SGD - one step per each training example; BGD - one step per epoch (entire training set)**
+
+### Some key points
+- When the training set size `m` is very large, SGD can be much faster than BGD.
+- The cost function should go down with eveyr iteration of BGD (assuming well-tuned learning rate alpha), but not necessarily with the SGD algo.
+- Before beginning the main loop of SGD, it is a good idea to shuffle the training data into a random order.
+
 # Advanced Topics
