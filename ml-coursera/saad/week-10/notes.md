@@ -111,6 +111,50 @@
 - If we plot `cost(theta(x^i. y^i))` (Averaged over the last 1000 examples) and SGD does not seem to be reducing the cost, one possible problem may be that the learning rate alpha is poorly tuned.
 	- Poorly tuned could mean that it is large enough to cause noise or variations about the actual cost which hides the overall trend.
 	- Poorly tuned could also mean that the learning rate is **too** large, and is causing the cost to diverge rather than converge.
-	  
 
 # Advanced Topics
+## Online Learning
+- A new large-scale ML setting that allows us to model problems in which we have a continuous stream of data coming in and would like the ML algo to learn from it..
+- FAANG: continuous stream of data created by a continuous stream of users helps algos learn user preferences.
+
+### Example - Online Shipping Service
+- Suppose you are running a shipping service (packages from loc A to loc B)
+- Users tell you pkg origin and destinations.
+- Based on shipping price, users tend to use the shipping service (positive example) and in other cases they don't (negative example).
+- Features `x` capture properties of the user (origin, destination, price).
+- Want to learn what is the probability that they will elect to ship the package given a specific set of features. `p(y = 1 | x)`
+	- This can help us pick a price that will maximise turnover and also maintain profit margin.
+- Will use logistic regression for this problem.
+- The algorithm for this problem is 
+` repeat forever {								// as long as you keep receiving a stream of users
+	Get (x, y) pair corresponding to the user 	// features and whether the user chose to use shipping service
+	Update theta using (x, y) only				// using the current training example - then discard: never reuses
+		theta_j = theta_j - learning_rate * (h_theta(x) - y) * x_j for all j 
+}
+`
+- If data is essentially unlimited (large userbase), then no need to reuse a single sample for training the model.
+
+### Effect of Online Learning Algos
+- Can adapt to changing user preferences.
+	- Maybe users start to become more or less price-sensitive.
+	- Maybe users have different preferences or locations.
+- The online learning algo will be able to keep track of this.
+- This is because as the pool of users changes, the updates to the parameters also changes.
+
+### Example - Product Search
+- Apply learning algo to give good search listings to user.
+- Run an online store that displays `n` of all `m` phones in response to a user search query. 
+- For each phone given a specific query, we can construct a feature vector `x` and we want to learn `p(y = 1 | x, theta)` so that we can show a user phones they are likely to buy.
+- `y = 1` if the user clicks on the phone. 
+- This problem is called the problem of learning the **predicted clickthrough rate** - predicted CTR.
+- Will run ten different gradient descents based on the 10 phones shown to a user in response to a query. 
+
+### Other Examples
+- What special offers to show the user?
+- Which news articles to show the user on a news aggregator website?
+- Collaborative filtering.
+
+### Key Points
+The advantages of using an online learning algorithm are
+1. It can adapt to changing user tastes (i.e. if `P(y | x, 0) changes over time`)
+2. It allows us to learn from a continuous stream of data since we use each example once and then no longer need to process it again.
