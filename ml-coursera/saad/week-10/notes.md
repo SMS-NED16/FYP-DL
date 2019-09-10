@@ -158,3 +158,26 @@
 The advantages of using an online learning algorithm are
 1. It can adapt to changing user tastes (i.e. if `P(y | x, 0) changes over time`)
 2. It allows us to learn from a continuous stream of data since we use each example once and then no longer need to process it again.
+
+## Map, Reduce, and Data Parallelism
+- Some ML problems are too big to be run on one computer: too much data to store and/or process.
+- Map/Reduce approach is an approach to large scale, distributed ML.
+- Map Reduce is at least as important as SGD if not more: just simpler to explain.
+- Suppose we are using BGD to optimise parameters `theta` for a data set of `m = 400M` examples.
+- Assume that we have 4 different machines that can be used to compute parameter updates.
+	- Machine 1 will compute the derivative sum term using the first 100 samples only.
+	- Machine 2 will update the derivative sum term using samples 101 - 200.
+	- Machine 3 will use samples 201 - 300.
+	- Machine 4 will use samplse 301 - 400.
+- After all these machiens have computed their respective `temp` variables, they will be sent to a centralised master server.
+- The master server will combine the derivative sum terms from all servers and use it to update parameters.
+- This is faster because of concurrency - we are breaking up the total computational between our machines so that all of them can work together and cut down total development time.
+- In practice, network latencies and overhead of combining results at the central server means the speed is not necessarily 4x.
+
+### When to parallelize?
+- Can the bulk of the work of the learning algo be expressed as computing a summation of some function(s) over a training set?
+- This is a good use case for the map-reduce model.
+- E.g. for advanced optimization with logistic regression.
+- Also have multiple processing/computing cores on a single computer. Send different portions of the training set to different cores. Each of the cores can then carry out the sum over a subset of the training set and then sending it to the central core.
+- Don't have to worry about network latency when using multiple cores in the same machine insteado of multiple computers.
+- Some linear algebra libraries will automatically parallelize their operations across all available cores, so may not have to worry about the map-reduce implementation.
