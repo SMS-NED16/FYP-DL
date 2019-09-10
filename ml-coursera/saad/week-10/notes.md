@@ -54,4 +54,20 @@
 - The cost function should go down with eveyr iteration of BGD (assuming well-tuned learning rate alpha), but not necessarily with the SGD algo.
 - Before beginning the main loop of SGD, it is a good idea to shuffle the training data into a random order.
 
+## Minibatch Gradient Descent
+- Another variant of the SGD and BGD algo that can sometimes work faster than SGD.
+- BGD: Use all `m` training examples in each iteration.
+- SGD: Use a single example in each iteration.
+- MBGD: Use `b` examples in each iteration, where `b` is the **mini-batch size**.
+	- Typical choice is 10 (range is 2 - 100)
+- Get `b` = 10 examples from the training set.
+- Compared to BGD, still allows us to make progress much faster
+	- Weights/parameters of the model are updated after the first 10 examples instead of all `m` examples.
+- But also solves some probles inherent in SGD.
+	- Why do we want to look at a batch of samples rather than an individual sample?
+	- If we have a good vectorized implementation, we can partially parallelize the gradient computations over the examples.
+	- If we just did single examples at a time, we would have less to parallelize over.
+- Disadvantage: may need to fiddle with the mini-batch size `b`.
+- MBGD becomes the same as batch GD if `b = m`.
+
 # Advanced Topics
