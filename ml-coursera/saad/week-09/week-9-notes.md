@@ -152,4 +152,33 @@
 ### TLDR
 - The key difference is the number of +ive examples: anomaly detection is useful when we can have the model learn entirely from a large number of negative examples.
 
+
+## Choosing Features
+- Anomaly detection performance depends heavily on the features chosen for the algorithm i.e. feature selection/engineering.
+- Plot a histogram of the data (a specific feature) before feeding it into an anomaly detection performance.
+- If the histogram of the data for a feature looks very skewed, use a **log transformation** of the data usually improves AD performance because it can make the feature more Gaussian.
+- Can also replace a feature with `log(x_i + c)` with `c` is an arbitrary constant that we will have to play with.
+- Can also use `x^(p)` where `p` is an arbitrary constant.
+
+### Error Analysis for Anomaly Detection
+- Similar to the method for supervised learning: plot the error after training the model on all training examples.
+- Want
+	- p(x) to be large for normal examples x.
+	- p(x) to be small for anomalous examples x.
+- The most common problem
+	- p(x) is comparable (say both large) for normal and anomalous examples.
+- The goal is to create a new feature (or set of features) that will help us distinguish anomalous examples fron non-anomalous ones.
+
+### Example - Monitoring Computers in a Data Center
+- Choose a feature that take on very large or very small values in the event of an anomaly.
+- E.g. if we are monitoring a set of computers in a data center through these features
+	- x1: memory use
+	- x2: number of disk accesses
+	- x3: cpu load
+	- x4: network traffic
+- We have a hypothesis that CPU load and network traffic grow linearly with each other.
+- A common failure case is if one server gets stuck in an infinite loop: network traffic does not grow with CPU load.
+- Create a new feature x5 = CPU load / network traffic or (CPU load)^2 / network traffic.
+- x5 will take on a very large value if this happens.
+
 # Recommender Systems and Collaborative Filtering
