@@ -58,5 +58,35 @@
 - `sigma` is the average value of the sum of squares of differences between the training example and mean value.
 - The values of `mu` and `sigma` are the maximum likelihood primes of the estimates of the mean and standard deviation.
 - The denominator in the computation of variance can be `m` or `m - 1`, and each has different mathematical properties, but because the dataset size `m` in ML is usually so large, this does not make much of a difference.
-s
+
+## Anomaly Detection Algorithm
+### Density Estimation
+- Assume me have an unlabeled training set of `m` training examples, and each example is a set of `n` real-numbers representing `n` features.
+- Our goal is to create a model `p(x)` that computes the probability of a given set of features representing an anomalous or non-anomalous sample (depends on the positive class)
+- `p(x)` is the product of probabilities of each feature `x_j` being parametrized as a normal distribution with mean `mu_j` and variance `sigma^2_j` for all `n` features.
+- Each feature has its own mean and standard deviation and is represented by its own Gaussian distribution.
+- Corresponds to an **independence assumption** between the features, but practically works well even if the features are not independent. 
+- This problem is called **density estimation**.
+
+### Algorithm
+1. Choose features `x` that you think might be indicative of anomalous examples.
+	- Features that would take unusually large or small values for an anomalous example.
+2. Fit parameters `mu_1, mu_2,..., mu_n` and `sigma2_1, sigma2_2,...,sigma2_n`.
+	- `mu_j` = `1/m * sum(i = 1, m)[x_j^i]`
+		- This is just the mean of values of a specific feature for all training examples in the dataset.
+	- `sig2_j` = `1/m * sum(i, m)(x_j^i - mu_j)^2`
+		- This is just the variance of a specific feature for all training examples in the dataset.
+	- Can also come up with a vectorized implementation of this 
+3. Given a new example `x`, compute `P(x)`
+	- `p(x)` = `product(j = 1, n)p(X_j; mu_j, sig2_j)`
+
+### Example
+- We have two different features, each of which is modelled as a normal distribution with its own mean and variance.
+- We compute the probability that a set of features represents a non-anomalous sample by multipling `p(x_1; mu_1, sig2_1) * p(x_2; mu_2, sig2_2)`.
+- This probability lies somewhere on a surface - the height of the 3D surface represents `p(X)` for a specific combination of `x_1, x_2`.
+- We then define a threshold `epsilon` that divides the surface plot into two regions - any probabilities inside the ellipse have probabilities greater than `epsilon` - non-anomalous.
+	- Large probability - not an anomaly
+	- Small probability - anomaly
+- So if a test point lies outside the non-anomalous region, it has a very small probability for `p(X)`.
+
 # Recommender Systems and Collaborative Filtering
