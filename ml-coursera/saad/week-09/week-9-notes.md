@@ -126,4 +126,30 @@
 	- The threshold that we would use to decide when to flag something as an anomaly.
 	- Try different values of epsilon and pick the value of epsilon that does well on the CV set.
 
+## Anomaly Detection and Supervised Learning
+- AD becomes very similar to supervised learning: we already know some examples that we know to be anomalous/non-anomalous.
+- Then why not just use supervised learning? Why use anomaly detection?
+
+### Anomaly Detection Use Cases
+- Very small number of positive examples (y = 1) e.g. 0 - 20 only. 
+	- These examples will be saved for the CV and test sets.
+	- Not used in the training set.
+- But a very large numbr of negative examples (y = 0) examples.
+- Mnay different **types** of anomalies. Hard for any algo to learn from positive examples will look like.
+- Future anomalies may not look anything like the historical anomalous data.
+- Fraud detection: usually small number of fradulent users unless we're a huge online retailer with lots of historically fradulent consumers.
+- Manufacturing (e.g. aircraft engines)
+- Monitoring machines in a data center
+
+### Supervised Learning Use Cases
+- Large number of positive and negative examples.
+- Enough positive examples for the algo to get a sense of what positive examples are like.
+- Future examples are likely to be similar to ones in the training set. 
+- E.g. spam emails can have a large variety of positive examples, but we also have a large **number** of examples with which to learn these varieties. So supervised learning makes sense here.
+- Weather prediction (sunny/rainy/etc.)
+- Cancer classification
+
+### TLDR
+- The key difference is the number of +ive examples: anomaly detection is useful when we can have the model learn entirely from a large number of negative examples.
+
 # Recommender Systems and Collaborative Filtering
