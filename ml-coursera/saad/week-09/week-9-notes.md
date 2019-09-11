@@ -1,9 +1,10 @@
 # Coursera Machine Learning - Week 9
 
 # Anomaly Detection
+## Anomaly Detection Motivation
 - A reasonably commonly used type of unsupervised ML but has some aspects that are similar to supervised learning.
 
-## Example - Aircraft QA
+### Example - Aircraft QA
 - Manufacturer of aircraft engines: QA testing
 - Measure features for each engine that comes off the production line.
 	- Heat generation `x1`
@@ -11,13 +12,13 @@
 - Anomaly detection problem is to find if an aircraft engine with a set of features `x_test` is anomalous i.e. differs too much from the other tested engines.
 - If `x_test` lies too far away from the cluster of previously tested points - anomalous, very different.
 
-## Density Estimation
+### Density Estimation
 - Given a dataset `x_1, x_2, ..., x_m` that we assume are non-anomalous.
 - We want to build a model for `p_x` which is the probability that an aircraft engine with the set of features `x` is **non-anomalous**. 
 - We define some threshold `epsilon` and if `p(x_test) < epsilon` then we flag it as an anomaly. 
 - Alternatively, if the `p(x_test)` is >= `epsilon`, then we say that the example is not anomalous.
 
-## Applications of Anomaly Detection
+### Applications of Anomaly Detection
 - Fraud Detection
 	- If we have many users and we are able to track their activities (on website or plant)
 	- We can make a set of features for the user's behaviour
