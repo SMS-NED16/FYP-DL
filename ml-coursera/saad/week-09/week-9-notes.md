@@ -219,7 +219,3 @@
 	- Have accidentally created featues that are just linear combinations of other/existing features.
 	- The covariance matrix needs to be linearly independent. 
 - The odds of this happening are very low. As long as `m` is much greater than `n`, running into a non-invertible covariance matrix is rare.
-
-
-
-# Recommender Systems and Collaborative Filtering
