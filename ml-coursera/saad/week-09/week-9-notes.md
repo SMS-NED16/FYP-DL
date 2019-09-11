@@ -89,4 +89,41 @@
 	- Small probability - anomaly
 - So if a test point lies outside the non-anomalous region, it has a very small probability for `p(X)`.
 
+## Developing an Anomaly Detection Application
+### Importance of Real Number Evaluation
+- When developing a learning algo (choosing features, etc.) making decisions is much easier if we have a way of numerically evaluating our learnign algorithm.
+	- A number or quantified measure of how a specific modification affected the algos performance.
+- Assume we have some labeled data of both anomalous and non-anomalous nature (labels are `y = 1`, and `y = 0` respectively).
+- Training set: unlabeled training set, but consists primarily of non-anomalous samples. May contain a few anomalous samples, though.
+- Cross Validation set and Test Sets: will include examples that are known to be anomalous.
+
+### Train/Test/CV Split
+- 10000 good (normal) engines
+- 20 flawed engines (anomalous) **y = 1**
+	- 20 - 50 is a typical range of values.
+- Train/test/CV split is as followes
+	- Train: 6k good engines (y = 0)
+		- Will be used to fit `p(x)`.
+	- CV: 2k good engines (y = 0), 10 anomalous (y = 1)
+	- Test: 2k good engines (y = 0), 10 anomalous (y = 1)
+- Specific reason for using a 60/20/20 split for train/CV/test.
+- Not recommended: 6k in test set, 4k in CV set. Test set not created separately - reuse CV examples for test set is a **bad ML practice**.
+
+### Model Evaluation
+- Fit the model `p(x)` on `x_1, x_2, ..., x_m`. Assuming most of these are normal (y = 0).
+- On a cross validation/test example, predict
+	- y = 1 if `p(x) < epsilon` i.e. is anomalous
+	- y = 0 if `p(x) > epsilon` i.e. is not anomalius.
+- So anomaly detection algorithm makes predictions for the `y` labels in the CV/test sets.
+	- This is somewhat similar to supervised learning.
+	- But these labels will be very skewed, because y = 0 will be more common than y = 1.
+- Possible evaluation metrics
+	- Classification accuracy will not be a good metric because results will tend to be skewed.
+	- True positive, false positive, false negative, true negative
+	- Precision/recall
+	- F1 Score 
+- Choosing `epsilon`
+	- The threshold that we would use to decide when to flag something as an anomaly.
+	- Try different values of epsilon and pick the value of epsilon that does well on the CV set.
+
 # Recommender Systems and Collaborative Filtering
