@@ -181,4 +181,14 @@
 - Create a new feature x5 = CPU load / network traffic or (CPU load)^2 / network traffic.
 - x5 will take on a very large value if this happens.
 
+## Multivariate Gaussian Distribution
+- Can sometimes catch anomalies that univariate GD-based AD cannot.
+- Assume we have two features: x1 and x2, each of which are modelled as Gaussian distributions.
+- It is possible that for a test example, P(x1) and P(x2) will both have relatively high probabilities, and so the conventional gaussian approach will fail even though in 2D space it lies far away from the nominal region.
+- Multivariate approach still uses `n` featues in real space, but instead of modelling them individually, it models them all in one go.
+- Sigma in this case is **not** the summation - it is an `n x n` matrix of covariances - usually identity (if we asssume features are independent).
+- Can use multivariate distributions to model correlations between data.
+	- By changing the off-diagonal values in the covariance matrix. The "direction" of the surface will change.
+- Can also vary the values of the mean - position of the peak will change. 
+
 # Recommender Systems and Collaborative Filtering
