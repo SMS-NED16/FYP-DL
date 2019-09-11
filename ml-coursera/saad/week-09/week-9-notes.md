@@ -189,6 +189,37 @@
 - Sigma in this case is **not** the summation - it is an `n x n` matrix of covariances - usually identity (if we asssume features are independent).
 - Can use multivariate distributions to model correlations between data.
 	- By changing the off-diagonal values in the covariance matrix. The "direction" of the surface will change.
-- Can also vary the values of the mean - position of the peak will change. 
+- Can also vary the values of the mean - position of the peak will change.
+- Allows us to capture when two or more features will be positively or negatively correlated. 
+
+## Anomaly Detection with Multivariate Gaussian Distribution
+- Formulae for `mu` and `sigma` are same as those used for PCA.
+- Original model is a special case of the mutivariate distribution in which the contours are always axis aligned.
+- The constraint is that the covariance matrix sigma **must have 0 on the off-diagonal elements**.
+	- Because independence assumption.
+
+### When to use each model?
+- Original Model
+	- Used somewhat more often.
+	- Manually create features to capture anomalies where x1, x2 take unusual combinations of values. 
+		- E.g. when we want to create a custom feature for anomaly detection. 
+	- Computationally cheaper (scales better to very large values of `n` or number of features.)
+	- Ok even if `m` is small.
+- Multivariate Gaussian Model
+	- Used less frequently, but has the advantage of being able to capture correlations between features.
+	- Automatically capture correlations between features.
+	- Computationally more expensive.
+	- `m` must be greater than the number of features `n`, otherwise the covariance matrix is not invertible.
+- Rule of thumb: only use multivariate model if `m` is **much bigger** than - greater than 10`n` or ideally `n^2 /2` but the latter is too large.
+
+### When is Covariance Matix singular?
+- Non-invertible.
+- Failing to satisfy `m` > `n` condition
+- Has redundant features
+	- Have accidentally created featues that are just linear combinations of other/existing features.
+	- The covariance matrix needs to be linearly independent. 
+- The odds of this happening are very low. As long as `m` is much greater than `n`, running into a non-invertible covariance matrix is rare.
+
+
 
 # Recommender Systems and Collaborative Filtering
