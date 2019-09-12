@@ -70,3 +70,27 @@
 - Guess theta > x > theta > x > theta > x and so on and so forth until convergence.
 - This is possible for this problem only because each user rates multiple movies and that allows us to iterate back and forth between the features and parameters.
 - So when we run the algo on a large set of users, all users are effectively collaborating to help the algorithm learn features that can be used by the system to make better recommendations for all other users.
+
+## Optimising Collaborative Filtering
+- Don't need to iterate back and forth between learning features and learning parameters.
+- Can optimise the cost function as a parameter of both the features and parameters while also regularizing both of them. 
+- Allows us to solve for optimal `theta` and `x` simultaneously using a new optimisation objective. 
+- First optimisation summation is sum over all users `j` and all movies rated by that user.
+- Second optimisation summation does the same thing but in the opposite order: for all movies `i` and all user ratings for that movie
+- So the first term in the new optimisation objective is simply combining both of those summation terms. 
+- It also has two regularization sums: one for parameters, and one for features. 
+- It's a mutlivariate optimisation/differentiation process.
+- The only difference is that we are no longer going back and forth between minimising only features and minimising only parameters. 
+
+### Regularization
+- Previously, during regularization of features we assumed the dummy or bias feature was always 1, but this time we're getting rid of `xo`.
+- So the feature and parameters will be vectors in `R_n`.
+- The reason we're doing this is because we're learning all the features, so there is no need to hardcode a feature that will be equal to one. If the algo needs to learn a feature that is equal to one, it now has the flexibility to do so itself. 
+
+### Algorithm
+- Initialize `x` and `theta` to small random values. 
+- Minimise the cost function using gradient descent or an advanced optimisation algorithm.
+	- See handwritten notes/lecture slides.
+	- No longer have `x_0` = 1 so both `x`, and `theta` are `n` dimensional vectors, not `n + 1` dimensional.
+	- No separate update for `x_0` and `theta_0`.
+- Given a user with some parameters `theta` and some movie with learned features `x`, we can predict that the user will rate the move `theta_transpose * x`.
