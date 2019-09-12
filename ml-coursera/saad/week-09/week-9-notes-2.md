@@ -94,3 +94,19 @@
 	- No longer have `x_0` = 1 so both `x`, and `theta` are `n` dimensional vectors, not `n + 1` dimensional.
 	- No separate update for `x_0` and `theta_0`.
 - Given a user with some parameters `theta` and some movie with learned features `x`, we can predict that the user will rate the move `theta_transpose * x`.
+
+## Vectorization and Related Movies
+### Vectorization
+- Just like linear regression.
+- Stack all feature vectors in rows by transposing them `X`.
+- Stack all parameter vectors in rows by transposing them `Theta`.
+- The predicted ratings is `Theta_transpose * X`.
+- Called a low-rank factorization algorithm because the prediction matrix has low rank
+	- Number of non-zero rows in reduced echelon form?
+
+### Related Movies
+- For each movie `i` we have learned a set of features `x_i` that capture the important aspects of each movie i.e. what causes different users to like different movies.
+- Difficult to interpret or visualize what these features are so no obvious qualitative interpretation available on inspection.
+- But can find **Related movies** using the distance between two movie feature vectors `x_i` and `x_j` in `n` dimensional space.
+	- If the distance is small, the two movies are somehow similar in that they have similar features. 
+- So to recommend 5 movies, we'd find the movies with the smallest difference between the feature vectors.
