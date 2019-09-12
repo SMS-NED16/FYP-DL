@@ -110,3 +110,18 @@
 - But can find **Related movies** using the distance between two movie feature vectors `x_i` and `x_j` in `n` dimensional space.
 	- If the distance is small, the two movies are somehow similar in that they have similar features. 
 - So to recommend 5 movies, we'd find the movies with the smallest difference between the feature vectors.
+
+## Mean Normalization
+- Consider the case where we have a user that has not rated any movie.
+- If a user hasn't rated any movie, then the cost function's first term plays no role in the optimisation.
+- Only the regularization term will affect the parameter learning.
+- So the regularization term will cause the parameters to be [0, 0]. So the predicted rating will be [0 0]T * [x1 x2] = [0 0] i.e. will rate all movies 0 stars.
+- If we're predicting that the new user is going to predict 0 stars for all movies, we have no way of predicting movie ratings. 
+- Create a vector of average ratings for each movie `mu` and subtract this from each column in the ratings matrix.
+- The idea is to give each movie a mean rating of 0 in the ratings matrix. 
+- For the user `j` on movie `i`
+	- `theta_j_transpose` times `x_i` + `mu_i` // since the training data subtracted all means, we must add mean when making prediction
+- So for the new user
+	- `theta_5_transpose` times `x_i` + `mu_i` // so the new user's predicted rating will be the average rating for the movie given by all other users.
+- Can also normalize columns instead of rows to have mean of zero. 
+- It is a data preprocessing step for collaborative filtering. May help the algo perform better, depending on implementation.
