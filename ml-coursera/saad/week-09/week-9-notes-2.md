@@ -44,4 +44,29 @@
 - Looks similar to the linear regression gradient descent except that `m` has been absorbed as a constant.
 - Called content-based approach because we assume we already have features about the content of the movies to help make predictions.
 
-### 
+## Collaborative Filtering Recommender Systems
+- Can be difficult/time-consuming/expensive to have every user watch every movie and rate it as belonging every possible category.
+- Suppose that we have a dataset where we know the movies and which movies have been rated by which users (along with their ratings), but no data about how much a specific movie belongs to a specific category.
+- But we do know how much a user likes a specific genre of movies: theta_1, theta_2, theta_3, theta_4,..., theta_nu.
+- It becomes possible what the values of `x1` and `x2` will be for each movie given a user. 
+- What feature vector should `x_i` be so that `theta_j times x^i`.
+- Usually, in regression problems, we would use gradient descent to find the parameters that would minimise the cost function.
+- In this case, we are attempting to find the **features** that will mini
+
+### Optimization Algorithm
+- Given `theta_1, theta_2, theta_3, ..., theta_nu` we want to learn `x_i`.
+- This is opposite to the conventional supervised learning approach we've seen so far where we use features `x_i` to predict the parameters `theta` that will lead to the best I/O mapping.
+- We're trying the optimal parameters `x_i` that will lead to a predicted score for a movie `theta_transpose x_i` that is as similar to the actual rating `y` for each rated movie rated by each user.
+
+
+### Collaborative Fultering
+- Given a vector of features `x` we can learm a vector of parameters `theta`.
+- Alternatively, given a vector of parameters `theta` we can learn a vector of features `theta`.
+- Chicken and egg problem: which comes first?
+	- Can start with a random set of features and learn `theta` approximation 1.
+	- Then use `theta` to learn a better set of features `x`.
+	- Then repeat.
+	- Back and forth between learning `theta` and then learning `x` will cause the algorithm to converge to a reasonable set of featueres and parameters.
+- Guess theta > x > theta > x > theta > x and so on and so forth until convergence.
+- This is possible for this problem only because each user rates multiple movies and that allows us to iterate back and forth between the features and parameters.
+- So when we run the algo on a large set of users, all users are effectively collaborating to help the algorithm learn features that can be used by the system to make better recommendations for all other users.
