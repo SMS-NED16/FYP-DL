@@ -5,7 +5,7 @@ Code for tutorials, tests, and experimentation done as part of a Deep Learning-b
 ## Project Summary
 Using supervised deep learning to systematically create, test, and optimise neural networks for detecting anomalous energy consumption patterns in smart meter data. Training using a labeled dataset published by the State Grid Corporation of China which spans 13 months of daily kWh smart meter measurements of ~42k residential consumers.
 
-More details are in the [Project Proposal](./Proposals/fyp-proposal-draft-07.pdf).
+More details are in the [Project Proposal](./Proposals/fyp-proposal-gh.pdf).
 
 ## Group Members
 All group members are final year undergraduates from Section D, Batch 2016-17 at the Department of Electrical Engineering, NEDUET.
