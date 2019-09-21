@@ -73,4 +73,39 @@
 - This allows us to vectorize the activation computation.
 - The process of computing h_theta(x) is called **Forward Propagation**
 	- Computing activations for successive layers in the NN by passing on or propagating previous layers activations to the next layer.
+	- Start off with activations of input units, then propagate to hidden layer then propagate to compute activations of output. 
+- If we don't consider the input or hidden layers, the NN looks a lot like logistic regression. 
+- So a NN is a lot like logistic regression, except that instead of using original features x1, x2, x3 it is using new features a1, a2, a3 that are activations computed by the hidden layers.
+- a1, a2, a3 are the features that the NN learns to feed into a logistic regression model: opens up a richer hypothesis space.
+- This algo has the flexibility to learn whatever features it wants in order to feed into the last logistic regression unit. 
+- The way neural networks are connected is called its architecture: can have different kinds of architectures.
 
+## Examples an Intuitions
+## NN for AND/OR
+- x1 and x2 are either 0 or 1. And y = x1 AND x2 i.e. y is 1 only if both x1 and x2 are 1.
+- Think of parameters as values associated with lines connecting nodes in the network.  
+- The activation of the final layer will be a single number that will vary based on the values of the inputs.
+- Single neurons can be used to compute logical functions such as AND and OR.
+- For negation, include a large negative weight for the variable you want to negate. 
+- See handwritten notes for full derivation.
+
+### XOR/XNOR
+- Consider a binary classification problem where x1 and x2 are either 0 and 1 and we want to learn a non-linear decision boundary to separate these examples.
+- Computes the target label x1 NOR x2, x1 XNOR x2
+	- x1 XOR x2 is true if only if one of x1 or x2 is true.
+	- x1 XNOR x2 computes the inverse of this.
+- See handwritten notes for full derivation.
+- The idea is that hidden layers are able to use activations of previous layers to compute progressively complicated non-linear functions. 
+- The final layer can then use the complex features to compute a logistic regression result.
+
+## Multiclass Classification
+- So far all the NN examples we have seen have performed only binary classification.
+- LeNet - the USPS digit recognition NN - is an example of a multiclass classification NN. 
+- This is done by an extension of the one vs all method.
+- Suppose we have a CV example where instead of just recognizing cars, we want to recognize 4 different categories of objects
+	- Pedestrian
+	- Car
+	- Motorcycle
+	- Truck
+- Output will be a 4-dimensional vector computed by 4 different activation units. 
+- So the prediction `y` will not be a single number 1, 2, 3, or 4, but rather a 4-dimensional vector where each element in the vector corresponds to the approximate probability that a given image belongs to one of the 4 classes
