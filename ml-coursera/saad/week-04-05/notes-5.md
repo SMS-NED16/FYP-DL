@@ -32,3 +32,33 @@
 - Multiple NNs output a steering direction - the output of the **most confident** network is used. 
 - As the vehicle approaches an intersection, confidence of the lone-lane network decreases.
 - Confidence of two-lane network rises when it detects 2 lane networks. 
+
+## Unrolling Parameters
+- When implementing backpropagation, we will have to unroll our matrix of parameters into a vector.
+- Consider a function
+function [jVal, gradient] = costFunction(theta) 
+...theta, gradient are all R_(n + 1) dimensional vectors
+	// Computes both the cost and the gradient
+- Can pass this function as an argument to an advanced optimisation function like `fminunc`
+	- All of them take a cost function as an argument along with initial values of the parameters
+	- Will then return the optimised parameters for our model.  
+`optimisedTheta = fminunc(@costFunction, initialTheta, options)`. 
+- For a neural network with 4 layers
+	- theta_1, theta_2, theta_3 - matrices of parameters mapping transformations from one layer to the next 
+	- D1, D2, D3 - accumulator matrices representing sum of derivatives for params in a specific layer.
+- All these matrices need to be unrolled into vectors so that they can be passed as arguments to an optimisation function.
+- Concatenate these elements in MATLAB
+thetaVec = [theta_1(:); theta_2(:); theta_3(:)];
+DVec = [D1(:); D2(:); D3(:)];
+- To revert back from vectors to matrices
+Theta1 = reshape(thetaVec, (1:110), 10, 11);		// first 110 elements are for theta 1 - into 10 x 11 matrix
+Theta2 = reshape(thetaVec, (111:220), 10, 11);		// the next 110 elements are for theta 2 - into 10 x 11 matrix
+Theta3 = reshape(thetaVec, (221:231), 1, 11);		// the last 11 elements are theta 3 - reshaped into 1 x 11 vec
+
+### Learning Algorithm
+- Have initial params theta_1, theta_2, theta_3. 
+- Unroll to get initialTheta to pass to fminunc(@costFunction, initialTheta, options).
+- Write a function to compute cost and gradient function [jVal, gradientVec] = costFunction(thetaVec)
+	- From thetaVec, get theta_1, theta_2, theta_3.
+	- Use forward propagataion and back propagation to get D_1, D_2, D_3, and J_theta.
+	- Unroll D_1, D_2, D_3 to get gradientVec
