@@ -1,4 +1,4 @@
-# FYP-DL: Applications of Neural Networks for Anomalous Consumer Energy Consumption Detection
+# FYP-DL: Applications of Neural Networks for Anomalous Energy Consumption Detection
 
 Code for tutorials, tests, and experimentation done as part of a Deep Learning-based undergraduate Final Year Project at the department of Electrical Engineering, NEDUET.
 
