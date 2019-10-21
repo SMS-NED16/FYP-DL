@@ -1,0 +1,77 @@
+Chapter 1: The Machine Learning Landscape - Exercises
+
+1. How would you define machine learning?
+A subfield of artificial intelligence which focuses on programmes learn meaningful representations of data to solve problems without writing explicit rules to do so. In other words. 
+
+2. Can you name foru types of problems where ML shines?
+- Problems for which conventional programming approaches would require a long list of hand-written, fine-tuned rules that would be difficult to maintain, update, and debug.
+- Problems for which there is no known solution or problems that are too complex to be solved by conventional rule-based programming alone.
+- Problems which require a list of rules to be updated autonomously in response to changes in data. 
+- Problems that focus on extracting insights or structure from data. 
+
+3. What is a labeled training set?
+A collection of training examples in which each sample consists of both a set of features as well as a label describing the "correct" targer or class for that sample. 
+
+4. What are the most common supervised task?
+- Regression: predicting a continuous output value given a set of input features.
+- Classification: predicting which of a finite set of classes a given training example belongs to given a set of input features. 
+
+5. Can you name four common unsupervised tasks?
+- Clustering: identifying segments or clusters of related training examples from data.
+- Vizualization: generating 2D or 3D plots of higher-dimensional data for inspection, which often helps identify relationships in the data.
+	- Dimensionality Reduction: Reducing the number of features for a given dataset prior to supervised learning, either to free up disk space or to improve time and computational complexity.
+- Association Rule Learning: Discovering relationships between attributes (features minus the actual values).
+- Anomaly/Novelty detection: Identifying training examples that are substantially different or anomalous relative to the majority of other training examples.
+
+6. What type of ML algo would you use to allow a robot to walk in various unknown terrains?
+Reinforcement learning algo.
+
+7. What type of algo would you use to segment your customers into multiple groups?
+Clustering algo (a type of unsupervised learning)
+
+8. Would you fram the problem of spam detection as a supervised learning problem or an unsupervised learning problem?
+Supervised learning problem because the learning algorithm is provided with a set of labeled training data i.e. a collection of emails that have already been marked as spam/ham.
+
+9. What is an online learning system?
+An online, or incremental, learning system is one that learns how to perform a task incrementally/on the fly using either individual training examples or minibatches of training examples instead of using the entire set of training data. 
+
+10. What is out-of-core learning?
+A form of online/incremental learning that is used for learning algorithms that process datasets that are too large to fit into a machine's memory at a given time. In out-of-core learning, the training set is divided into smaller batches, each of which is then loaded into memory and used to help the model learn to how to perform a task.
+
+11. What type of learning algo relies on a similarity measure to make predictions?
+Instance-based learning algorithms. 
+
+12. What is the difference between a model parameter and a learning algorithm's hyperparameter?
+A model parameter is a characteristic of the model that is updated automatically during training using data. Hyperparameters are not parameters of any model, but rather of the learning algorithm being applied to a dataset. They remain constant during a single training cycle, but are often optimised/changed between trainings.
+
+13. What do model-based learning algos search for? What is the most common strategy they use to succeed? How do they make predictions?
+Model-based learning algos search for optimal values of parameters that will either minimise their cost - a measure of how bad the algorithm is in fitting data - or maximise their utility - a measure of how good the algorithm is at fitting data. 
+
+When a set of features is input to the model, the model uses its existing parameters to compute the output according to the mathematical relationship learnt using the data. 
+
+14. Can you name four of the main challenges in ML?
+- Insufficient Training Data
+- Poor Quality Data
+	- Data that contains too many outliers, erroneous values, or missing values.
+	- Training data that is not representative of the kind of data the model will be used to make predictions on when deployed.
+- Irrelevant features 
+- Overfitting the training data
+- Underfitting the training data
+
+15. If your model performs great on the training data but generalizes poorly to new instances, what is happening? Can you name three possible solutions?
+This is indicative of overfitting: the model has optimised its weights to fit the training data too well at the expense of generalizability. Three possible solutions
+- Get more training data
+- Reduce the complexity of the model, reduce the number of features being used in the training data, or constrain the model's parameters using regularization.
+- Reduce noise in the training data by removing outliers, erroneous or missng values.
+
+16. What is a test set and why would you want to use it?
+A test set is a subset of the data that is used to evaluate a model's performance after it has been trained on the entire training data (training set and validation set). It helps us gauge how well the model performs on previously unseen data i.e. how well it is likely to generalize to new data after being deployed, without actually deploying the model and dealing with all the risks of an overfit/undefit model.
+
+17. What is the purpose of a validation set?
+A validation set is a subset of the training data that is used to monitor the performance of a model during training. Specifically, it can be used as an indicator to tune hyperparameters without necessarily modifying the generalizing power of the model.
+
+18. What can go wrong if you tune the hyperparameters using the test set? 
+Without the validation set, hyperparams would have to be tuned on the basis of performance on the test set, which would lead to an information leak from the test set: the model would implicitly begin to fit the test set, and may not perform as well on truly unseen data after deployment. 
+
+19. What is repeated cross-validation and why would you prefer it to using a single validation set?
+Repeated cross-validation involves dividing the non-test data into `K` subsets or folds. The model is then trained on `K-1` folds with the last fold being used as a validation set. This process is repeated for all `K` folds as validation sets, and in doing so minimizes sampling noise associated with very small validation sets. Thus, it helps give a better estimate of the model's performance/training.
