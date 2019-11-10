@@ -3,6 +3,7 @@
 Dl-Python-Book/chapter-6/aclImdb/
 Dl-Python-Book/chapter-6/jena_climate_2009_2016.csv
 ./Proposals/*draft*
+./ML-Hands-On/images/
 
 # Quiz files for Online Courses using regex
 quiz-*
