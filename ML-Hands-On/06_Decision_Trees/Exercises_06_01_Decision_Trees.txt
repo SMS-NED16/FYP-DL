@@ -1,0 +1,28 @@
+1. What is the appropximate depth of a Decision Tree trained (without restrictions) on a training set with 1M instances?
+- Scikit-Learn tries will create binary decision trees: two trees at each level. 
+- Binary trees will end up more or less balanced at the end of training.
+- In a balanced binary tree, there will be one leaf per training sample.
+- The depth of a binary tree containing `m` leaves is approximately log_2(m).
+- So the depth of a Decision Tree containing one leaf per training sample, when traind on 10M training samples, will be ~log_2(10M) ~ 20. 
+- Practically, it wil likely be a bit more than 20 since the tree will not be perfectly balanced.
+
+2. Is a node's Gini impurity generally lower or greater than it's parent? is it generally lower/greater or ALWAYS lower/greater?
+- Gini impurity of a child node is GENERALLY lower than its parent's.
+- This is because the CART algorithm's cost function is such that it splits each node in a way that minimizes the weighted sum of its children's Gini impurities. 
+- But if one child is smaller tan the other, it is possible for it to have a higher Gini impurity than its parent as long as this increase is compensated for by a decrease of the other child's impurity. 
+
+3. If a Decision Tree is overfitting the training set, is it a good idea to try decreasing max depth?
+- Yes. This will constraint the model. It is a form of regularization. It effectively limits the number of parameters in the decision tree by limiting the number of splits which can be made.
+
+4. If a Decision Tree is underfitting the training set, is it a good idea to try scaling the input features?
+- No. Decision Trees don't care whether or not data is centered or scaled. This means feature scaling is likely to have little effect on the underfitting.
+
+5. If it takes one hour to train a DT on a training set with 1M instances, roughly how much time will it take to train another DT on a training set containing 10M instances. 
+- Training time complexity is n * mlog(m). 
+- t_1 = n * m * log(m)
+- t_2 = n * 10m * log(10m)
+- t_2 / t_1 = [n * 10m * log(10m)] / [n * m * log(m)]
+=> 10 * log(10m) / log(m) => [10 * log(10 * 10^6)] / log(10^6 ~11.67 times longer.
+
+6. If the training set contains 100,000 instances, will setting presort=True speed up training?
+- No. Presort only helps improve training speeds in case of a few thousand instances. 
