@@ -1,0 +1,64 @@
+Q1) If you have trained five different models on the exact same training data, and they all achieve 95% precision, is there any chance that you can combine these models to get better results? If so, how? If not, why?
+MY ANSWER
+- Yes, it is possible to combine these models to get better results using ensembling: combinining the predictions of multiple models to make an aggregated or weightedprediction. 
+- This will work because the models will be different, and will have made different errors, and that these errors are not correlated with each other. 
+- So when their results are aggregated in an ensemble classifier (such as a voting classifier), it is unlikely that all models will have made the same error on the same samples -> the final prediction is likely to be affected by erroneous prediction made by just one model. 
+- This makes the predictions more robust. 
+
+The only case where ensembling will not work is where all the models are either similar in nature or make similar, correlated errors. 
+
+
+Q2) What is the difference between hard and soft voting classifiers?
+MY ANSWER
+- Hard voting classifiers make classifications based on the modal class or class voted for by the majority of the constituent classifiers in the ensemble. 
+- Soft voting classifiers actually take the predicted class probabilities into account when predicting a class. The predicted class of a soft voting classifier is the class with the highest class probability averaged across all estimators. 
+- Because of this additional level of granularity in making decisions, soft voting classifiers tend to generalize better and outperform hard voting classifiers. 
+
+Q3) Is it possible to speed up training of a bagging ensemble by distributing it across mutliple servers? What about pasting, boosting, stacking, and random forest ensembles?
+MY ANSWER
+- Bagging: Make several instances of the SAME predictor/ML model, train them on different subsets
+of the training set with training set examples being drawn WITH replacement. So it is possible
+for predictors to see the same sample multiple times during training (63% seen, 33% not seen).
+- Pasting: Make several instances of the SAME predictor/ML model, train them on different subsets
+of the training set with training set examples being drawn WITHOUT replacement. Not possible for 
+a predictor to see the same sample several times during training.
+- Random Forest: just another name for bootstrap aggegating (bagging) results of multiple Decision Tree models, with additional randomness introduced in terms of the subset of features sampled for creating a split.
+- Boosting: Train several instances of the same machine learning model in succession, with each model 'correcting' errors made by the previous model by paying more attention to misclassified 
+samples or samples that contributed to loss. 
+- Stacking: Train a metamodel to perform the aggregation of a results from constituent models of an ensemble classifier. 
+
+Possible to speed up through parallel processing
+- Bagging
+- Pasting
+- Random Forests 
+
+Not possible to speed up through parallel processing (or only partially possible)
+- Boosting
+- Stacking: Partially possible. All predictors within a layer can be trained on different machines, but predictors in one layer can only be trained after the predictors in the previous layer have been trained.
+
+Q4) What is the benefit of out-of-bag evaluation?
+MY ANSWER
+- Due to resampling in bootstrap aggregation, each constituent predictor of an ensemble model
+sees, on average, 63% of training samples during training. Remaining 33% are never seen by the predictor.
+- These samples are said to be 'out of bag' of training samples.
+- Because the model never sees 'out of bag' samples during training, they can be used for validation or evaluation. 
+- This means we don't have to reserve a separate validation set or test set, and can potentially use more of our data for training. 
+
+Q5) What makes extra trees more random than regular random forests? How can this extra randomness help? Are extra trees slower or faster than regular random forests?
+- Random forests: bagging ensembles of multiple decision trees. Introduce randomness by 
+	- Choosing a random subset of features to search for a feature to use for splitting nodes.
+	- Choosing a random feature from within the patch/subset for splitting a node.
+- Extra-Trees: Extremely Randomized Trees. Do everything Random Forests do, but also 
+	- use a randomly defined threshold for splitting each node of the tree.
+- This is useful because it decreases the overall variance of the ensemble at the cost of a small increase in bias, making the model less likely to overfit.
+- They also make the ensemble faster to train: searching for a threshold value to minimize gini impurity or entropy is the most computationally intensive part of training a random forest - this part is eliminated with the use of random thresholds.
+- But they are not faster or slower than random forest when making predictions.
+
+
+Q6) If your AdaBoost ensemble underfits the training data, what hyperparameters should you tweak and how?
+- Reduce regularization parameters of the base estimator. 
+- Number of predictors: generally, increasing the number of predictors will mitigate underfitting
+
+Q7) If your Gradient Boosting ensemble overfits the training data, should you increase or decrease the learning rate?
+- Decrease learning rate. 
+- Also try using early stopping to find optimal number of predictors - chances are, we have far too many predictors, which is resulting in overfititng.
