@@ -7,6 +7,9 @@ Using supervised deep learning to systematically create, test, and optimise neur
 
 More details are in the [Project Proposal](./FYP-Documents/Proposals/fyp-proposal-gh.pdf).
 
+## Progress Reports
+- [Midyear Progress Report](./FYP-Documents/midyear-report.pdf)
+
 ## Group Members
 All group members are final year undergraduates from Section D, Batch 2016-17 at the Department of Electrical Engineering, NEDUET.
 
