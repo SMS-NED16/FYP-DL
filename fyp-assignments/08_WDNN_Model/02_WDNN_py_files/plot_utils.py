@@ -1,18 +1,13 @@
-#  IMPORTs
-# Standard imports
-import numpy as np 
-import pandas as pd 
-import os 
-
-# Plotting 
+#  IMPORTs 
+# For generating plots 
 import matplotlib.pyplot as plt 
 from matplotlib import style
 style.use('ggplot')
 %matplotlib inline 
-from seaborn import distplot, heatmap
 
-# Tensorflow and Keras
-from tensorflow import keras
+# For saving and loading files with Python 
+import pickle
+
 
 
 
