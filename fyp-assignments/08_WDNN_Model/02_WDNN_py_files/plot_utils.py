@@ -3,6 +3,7 @@
 import matplotlib.pyplot as plt 
 from matplotlib import style
 style.use('ggplot')
+#%matplotlib inline
 
 # For saving and loading files with Python 
 import pickle
@@ -54,7 +55,9 @@ def plot_history(history, model_name=None, figsize=(12, 6),
 
 
 #  PLOT TRAINING TRENDS
-def plot_training_trends(history_list, labels_list, suptitle):
+def plot_training_trends(all_histories, suptitle):
+  # Extracting values and labels
+  history_list, labels_list = extract_histories(all_histories).values(), all_histories.keys()
   # Empty lists first
   lost_lists = []
   val_loss_lists = []
@@ -159,4 +162,3 @@ def load_training_history(file_name):
   """Loads a dictionary of history dictionaries from file"""
   with open(file_name, 'rb') as pkl_file:
       return pickle.load(pkl_file)
-
