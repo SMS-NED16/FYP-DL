@@ -5,7 +5,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, MaxAbsScaler, RobustScaler, FunctionTransformer
 
 # Imports for 2D pipeline functions
-from wdnn_transformers import ZeroPadder, Reshaper_2D
+from wdnn_transformers import ZeroPadder, DailyToWeekly
 
 def get_feature_scaler(scaling_strategy='Standard'):
       """Helper function to return a Scikit-Learn Scaler object for use with a 
