@@ -3,7 +3,6 @@
 import matplotlib.pyplot as plt 
 from matplotlib import style
 style.use('ggplot')
-%matplotlib inline 
 
 # For saving and loading files with Python 
 import pickle
