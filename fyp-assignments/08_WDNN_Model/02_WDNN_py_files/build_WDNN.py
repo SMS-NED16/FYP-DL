@@ -3,7 +3,7 @@ from tensorflow import keras
 
 
 def build_model(wnn_activation='relu', wnn_units=60, cnn_activation='relu',
-               cnn_filters=18, cnn_kernel_size=(3, 3), cnn_pool_size=(3, 3), 
+               cnn_filters=8, cnn_kernel_size=(3, 3), cnn_pool_size=(3, 3), 
                cnn_dense_activation='relu', optimizer='adam', show_summary=False,
                show_graph=False): 
   """Function that builds a WDNN with the specified hyperparameters. Will be passed
