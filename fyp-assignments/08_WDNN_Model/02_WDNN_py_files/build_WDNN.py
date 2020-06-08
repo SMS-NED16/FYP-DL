@@ -1,7 +1,7 @@
 #  BUILD WDNN MODEL
 from tensorflow import keras
 
-def build_WDNN_model(wnn_activation='relu', wnn_units=54, cnn_activation='selu', 
+def build_model(wnn_activation='relu', wnn_units=54, cnn_activation='selu', 
   cnn_filters=[8], cnn_kernel_Size=(3, 3), cnn_pool_size=(3, 3), cnn_dense_activation='relu', 
   optimizer='adam', show_summary=False, show_graph=False):
   """
