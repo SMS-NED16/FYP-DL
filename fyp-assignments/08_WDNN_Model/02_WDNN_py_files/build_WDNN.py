@@ -44,7 +44,8 @@ def build_model(wnn_activation='relu', wnn_units=54, cnn_activation='selu',
 
   # CNN HIDDEN LAYERS
   # Confirming that `n_cnn_filters` is a list before proceeding
-  assert type(cnn_filters) == list 
+  try:
+  	assert type(cnn_filters) == list 
   except AssertionError:
     print("n_cnn_filters is not a list.")
     return
