@@ -13,6 +13,15 @@ More details are in the [Project Proposal](./FYP-Documents/Proposals/fyp-proposa
 |Final|October 2020|[Final Presentation](./FYP-Documents/eed-group13-final-presentation.pdf)|[Final Report](./FYP-Documents/eed-group13-final-report.pdf)|CNN, WDNN, Class Imbalance, Tuning, Deployment|
 |Midyear|March 2020|[Midyear Presentation](./FYP-Documents/eed-group13-midyear-presentation.pdf)|[Midyear Report](./FYP-Documents/eed-group13-midyear-report.pdf)|LogReg, SVM, Random Forest, WNN, Tuning|
 
+## Results
+### Improvement of up to 6% on benchmark's test set ROC AUC 
+<img src="./FYP-Documents/Images/fyp-final-results.png" alt="FYP Results - ROC AUC" align="center">
+<img src="./FYP-Documents/Images/fyp-final-results-pct.png" alt="FYP Results - ROC AUC Improvement" align="center">
+
+### Successfully deployed and used for inference as API on AWS Sagemaker.
+<img src="./FYP-Documents/Images/fyp-aws-api.png">
+<img src="./FYP-Documents/Images/fyp-aws-req-res.png">
+
 ## Group Members
 All group members are final year undergraduates from Section D, Batch 2016-17 at the Department of Electrical Engineering, NEDUET.
 
