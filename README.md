@@ -8,10 +8,10 @@ Using supervised deep learning to systematically create, test, and optimise neur
 More details are in the [Project Proposal](./FYP-Documents/Proposals/fyp-proposal-gh.pdf).
 
 ## Progress
-|No.|Evaluation|Presentation|Report|Summary|
+|Evaluation|Date|Presentation|Report|Summary|
 |:--------:|:--------:|:--------:|:--------:|--------------------|
-|1|Final|[Final Presentation](./FYP-Documents/eed-group13-final-presentation.pdf)|[Final Report](./FYP-Documents/eed-group13-final-report.pdf)|CNN, WDNN, Class Imbalance, Tuning, Deployment|
-|2|Midyear|[Midyear Presentation](./FYP-Documents/eed-group13-midyear-presentation.pdf)|[Midyear Report](./FYP-Documents/eed-group13-midyear-report.pdf)|LogReg, SVM, Random Forest, WNN, Tuning|
+|Final|October 2020|[Final Presentation](./FYP-Documents/eed-group13-final-presentation.pdf)|[Final Report](./FYP-Documents/eed-group13-final-report.pdf)|CNN, WDNN, Class Imbalance, Tuning, Deployment|
+|Midyear|March 2020|[Midyear Presentation](./FYP-Documents/eed-group13-midyear-presentation.pdf)|[Midyear Report](./FYP-Documents/eed-group13-midyear-report.pdf)|LogReg, SVM, Random Forest, WNN, Tuning|
 
 ## Group Members
 All group members are final year undergraduates from Section D, Batch 2016-17 at the Department of Electrical Engineering, NEDUET.
