@@ -8,6 +8,7 @@ Using supervised deep learning to systematically create, test, and optimise neur
 More details are in the [Project Proposal](./FYP-Documents/Proposals/fyp-proposal-gh.pdf).
 
 ## Progress Reports
+- [Final Report](./FYP-Documents/eed-group13-final-report.pdf)
 - [Midyear Progress Report](./FYP-Documents/eed-group13-midyear-report.pdf)
 
 ## Group Members
